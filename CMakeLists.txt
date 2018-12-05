@@ -14,5 +14,5 @@ add_subdirectory(abseil-cpp)
 
 # -------- viewer
 
-add_executable(viewer viewer.cpp PPM.cpp PPM.h)
+add_executable(viewer viewer.cpp PPM.cpp PPM.h vec3.h ray.h)
 target_link_libraries(viewer ${OpenCV_LIBS} absl::str_format)
