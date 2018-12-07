@@ -24,3 +24,14 @@ add_subdirectory(abseil-cpp)
 
 add_executable(viewer viewer/viewer.cpp)
 target_link_libraries(viewer ${OpenCV_LIBS})
+
+# -------- pragprog
+
+add_library(
+        pragprog_raytracing
+        pragprog_raytracing/Vector3.cpp pragprog_raytracing/Vector3.h
+)
+
+add_executable(pragprog_raytracing_tests pragprog_raytracing/Vector3_unittest.cpp)
+target_link_libraries(pragprog_raytracing_tests gtest gtest_main)
+target_link_libraries(pragprog_raytracing_tests pragprog_raytracing)
