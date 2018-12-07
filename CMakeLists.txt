@@ -23,7 +23,14 @@ add_subdirectory(abseil-cpp)
 # -------- viewer
 
 add_executable(viewer viewer/viewer.cpp)
-target_link_libraries(viewer ${OpenCV_LIBS})
+add_subdirectory(efsw)
+set(STATIC_LIB ON)
+set(BOOST_ROOT "/Users/blanders/.brew")
+find_package(Boost 1.68.0 COMPONENTS system filesystem REQUIRED)
+
+include_directories(viewer efsw/include)
+include_directories(viewer ${Boost_INCLUDE_DIRS})
+target_link_libraries(viewer ${OpenCV_LIBS} efsw ${Boost_LIBRARIES})
 
 # -------- pragprog
 

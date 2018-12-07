@@ -4,3 +4,6 @@
 [submodule "googletest"]
 	path = googletest
 	url = https://github.com/abseil/googletest.git
+[submodule "efsw"]
+	path = efsw
+	url = https://github.com/mnafees/efsw.git
