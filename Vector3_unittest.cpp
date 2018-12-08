@@ -22,13 +22,14 @@ namespace {
         Vector3 a(1, -2, 3);
         ASSERT_EQ(Vector3(-1, 2, -3), -a);
     }
+
     TEST(Vector3, ScalarMultiply1) {
         Vector3 a(1, -2, 3);
         ASSERT_EQ(Vector3(3.5, -7, 10.5), a * 3.5);
     }
 
     TEST(Vector3, ScalarMultiply2) {
-        Vector3 a(1,-2, 3);
+        Vector3 a(1, -2, 3);
         ASSERT_EQ(Vector3(0.5, -1, 1.5), a * 0.5);
     }
 
@@ -66,6 +67,6 @@ namespace {
         Vector3 a(1, 2, 3);
         Vector3 b(2, 3, 4);
         ASSERT_EQ(Vector3(-1, 2, -1), Cross(a, b));
-        ASSERT_EQ(Vector3(1, -2,  1), Cross(b, a));
+        ASSERT_EQ(Vector3(1, -2, 1), Cross(b, a));
     }
 }

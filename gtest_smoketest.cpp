@@ -3,6 +3,7 @@
 //
 
 #include "gtest/gtest.h"
+
 namespace {
     TEST(SmokeTest, Test1) {
         EXPECT_EQ(1, 1);
