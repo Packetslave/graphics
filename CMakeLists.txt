@@ -22,7 +22,7 @@ add_subdirectory(abseil-cpp)
 
 # -------- viewer
 
-add_executable(viewer viewer/viewer.cpp)
+add_executable(viewer viewer.cpp)
 add_subdirectory(efsw)
 set(STATIC_LIB ON)
 set(BOOST_ROOT "/Users/blanders/.brew")
@@ -32,13 +32,29 @@ include_directories(viewer efsw/include)
 include_directories(viewer ${Boost_INCLUDE_DIRS})
 target_link_libraries(viewer ${OpenCV_LIBS} efsw ${Boost_LIBRARIES})
 
-# -------- pragprog
+# Vector3 and test
 
-add_library(
-        pragprog_raytracing
-        pragprog_raytracing/Vector3.cpp pragprog_raytracing/Vector3.h
-)
+add_library(vector3 SHARED Vector3.h)
+set_target_properties(vector3 PROPERTIES LINKER_LANGUAGE CXX)
 
-add_executable(pragprog_raytracing_tests pragprog_raytracing/Vector3_unittest.cpp)
-target_link_libraries(pragprog_raytracing_tests gtest gtest_main)
-target_link_libraries(pragprog_raytracing_tests pragprog_raytracing)
+add_executable(vector3_unittest Vector3_unittest.cpp)
+target_link_libraries(vector3_unittest vector3)
+target_link_libraries(vector3_unittest gtest gtest_main)
+
+# Color and test
+
+add_library(color SHARED Color.h)
+set_target_properties(color PROPERTIES LINKER_LANGUAGE CXX)
+
+add_executable(color_unittest Color_unittest.cpp)
+target_link_libraries(color_unittest color)
+target_link_libraries(color_unittest gtest gtest_main)
+
+# Canvas and test
+
+add_library(canvas SHARED Canvas.h)
+set_target_properties(canvas PROPERTIES LINKER_LANGUAGE CXX)
+
+add_executable(canvas_unittest Canvas_unittest.cpp)
+target_link_libraries(canvas_unittest canvas absl::base absl::str_format)
+target_link_libraries(canvas_unittest gtest gtest_main)

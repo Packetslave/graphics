@@ -25,7 +25,7 @@ public:
     }
 
     void show() {
-        watcher_->addWatch(path_.parent_path().c_str(), this, false);
+        watcher_->addWatch(path_.parent_path().string(), this, false);
         this->display();
     }
 
