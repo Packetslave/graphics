@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 project(graphics)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 
 # -------- Google Test
 
@@ -32,10 +33,16 @@ include_directories(viewer efsw/include)
 include_directories(viewer ${Boost_INCLUDE_DIRS})
 target_link_libraries(viewer ${OpenCV_LIBS} efsw ${Boost_LIBRARIES})
 
+# Tuple
+
+add_library(tuple SHARED Tuple.h)
+set_target_properties(tuple PROPERTIES LINKER_LANGUAGE CXX)
+
 # Vector3 and test
 
 add_library(vector3 SHARED Vector3.h)
 set_target_properties(vector3 PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(vector3 tuple)
 
 add_executable(vector3_unittest Vector3_unittest.cpp)
 target_link_libraries(vector3_unittest vector3)
@@ -58,3 +65,13 @@ set_target_properties(canvas PROPERTIES LINKER_LANGUAGE CXX)
 add_executable(canvas_unittest Canvas_unittest.cpp)
 target_link_libraries(canvas_unittest canvas absl::base absl::str_format)
 target_link_libraries(canvas_unittest gtest gtest_main)
+
+# Matrix and test
+
+add_library(matrix SHARED Matrix.h)
+set_target_properties(matrix PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(matrix vector3)
+
+add_executable(matrix_unittest Matrix_unittest.cpp Matrix.h)
+target_link_libraries(matrix_unittest matrix absl::base absl::str_format)
+target_link_libraries(matrix_unittest gtest gtest_main)
