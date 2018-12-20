@@ -33,6 +33,15 @@ include_directories(viewer efsw/include)
 include_directories(viewer ${Boost_INCLUDE_DIRS})
 target_link_libraries(viewer ${OpenCV_LIBS} efsw ${Boost_LIBRARIES})
 
+# Timer library and test
+
+add_library(timer SHARED Timer.h)
+set_target_properties(timer PROPERTIES LINKER_LANGUAGE CXX)
+
+add_executable(timer_unittest Timer_unittest.cpp)
+target_link_libraries(timer_unittest timer)
+target_link_libraries(timer_unittest gtest gtest_main)
+
 # Tuple
 
 add_library(tuple SHARED Tuple.h)
