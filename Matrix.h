@@ -13,10 +13,10 @@ public:
     explicit Matrix(const size_t size) {  // FIXME: allow non-square matrices
         data_.resize(size);
 
-        for (int i = 0; i < size; ++i) {
+        for (size_t i = 0; i < size; ++i) {
             data_[i].resize(size);
 
-            for (int j = 0; j < size; ++j) {
+            for (size_t j = 0; j < size; ++j) {
                 data_[i][j] = 0.0;
             }
         }
@@ -24,25 +24,29 @@ public:
 
     explicit Matrix(const std::vector<const std::vector<float>> &values) : Matrix(values.size()) {
         // FIXME: use a better copy function
-        for (int i = 0; i < values.size(); ++i) {
-            for (int j = 0; j < values.size(); ++j) {
+        size_t size = values.size();
+
+        for (size_t i = 0; i < size; ++i) {
+            for (size_t j = 0; j < size; ++j) {
                 data_[i][j] = values[i][j];
             }
         }
     }
 
-    float get(int row, int column) const { return data_[row][column]; }
+    float get(size_t row, size_t column) const { return data_[row][column]; }
 
-    void set(int row, int column, float value) { data_[row][column] = value; }
+    void set(size_t row, size_t column, float value) { data_[row][column] = value; }
 
     size_t size() const {
         return data_.size();
     }
 
     Matrix transpose() const {
-        Matrix out(data_.size());
-        for (int i = 0; i < data_.size(); ++i) {
-            for (int j = 0; j < data_.size(); ++j) {
+        size_t size = data_.size();
+
+        Matrix out(size);
+        for (size_t i = 0; i < size; ++i) {
+            for (size_t j = 0; j < size; ++j) {
                 out.set(j, i, data_[i][j]);
             }
         }
@@ -54,22 +58,24 @@ public:
     }
 
     float determinant() const {
-        if (data_.size() == 2) {
+        size_t size = data_.size();
+
+        if (size == 2) {
             return data_[0][0] * data_[1][1] - data_[0][1] * data_[1][0];
         }
         float out = 0.0;
-        for (int i = 0; i < data_.size(); ++i) {
+        for (size_t i = 0; i < size; ++i) {
             out += (data_[0][i] * this->cofactor(0, i));
         }
         return out;
     }
 
-    float minor(int row, int column) const {
+    float minor(size_t row, size_t column) const {
         Matrix sub = this->submatrix(row, column);
         return sub.determinant();
     }
 
-    float cofactor(int row, int column) const {
+    float cofactor(size_t row, size_t column) const {
         float minor = this->minor(row, column);
         if ((row + column) % 2 == 1) {
             return -minor;
@@ -82,8 +88,8 @@ public:
         float det = this->determinant();
 
         Matrix out(size);
-        for (int row = 0; row < size; ++row) {
-            for (int col = 0; col < size; ++col) {
+        for (size_t row = 0; row < size; ++row) {
+            for (size_t col = 0; col < size; ++col) {
                 float c = this->cofactor(row, col);
                 out.set(col, row, c / det);
             }
@@ -91,16 +97,18 @@ public:
         return out;
     }
 
-    Matrix submatrix(int row, int column) const {
-        Matrix out(data_.size() - 1);
+    Matrix submatrix(size_t row, size_t column) const {
+        size_t size = data_.size();
 
-        int out_r = 0;
-        for (int r = 0; r < data_.size(); ++r) {
+        Matrix out(size - 1);
+
+        size_t out_r = 0;
+        for (size_t r = 0; r < size; ++r) {
             if (r == row) {
                 continue;
             }
-            int out_c = 0;
-            for (int c = 0; c < data_.size(); ++c) {
+            size_t out_c = 0;
+            for (size_t c = 0; c < size; ++c) {
                 if (c == column) {
                     continue;
                 }
@@ -117,8 +125,13 @@ private:
 };
 
 inline bool operator==(const Matrix &a, const Matrix &b) {
-    for (int i = 0; i < a.size(); i++) {
-        for (int j = 0; j < a.size(); j++) {
+    size_t size = a.size();
+    if (b.size() != size) {
+        return false;
+    }
+
+    for (size_t i = 0; i < size; i++) {
+        for (size_t j = 0; j < size; j++) {
             if (a.get(i, j) != b.get(i, j)) {
                 return false;
             }
@@ -132,12 +145,13 @@ inline bool operator!=(const Matrix &a, const Matrix &b) {
 }
 
 inline Matrix operator*(const Matrix &a, const Matrix &b) {
-    Matrix out(a.size());
+    size_t size = a.size();
+    Matrix out(size);
 
-    for (int row = 0; row < a.size(); ++row) {
-        for (int col = 0; col < a.size(); ++col) {
+    for (size_t row = 0; row < size; ++row) {
+        for (size_t col = 0; col < size; ++col) {
             float sum = 0;
-            for (int i = 0; i < a.size(); ++i) {
+            for (size_t i = 0; i < size; ++i) {
                 sum += (a.get(row, i) * b.get(i, col));
             }
             out.set(row, col, sum);
@@ -146,14 +160,9 @@ inline Matrix operator*(const Matrix &a, const Matrix &b) {
     return out;
 }
 
-inline Matrix operator*(const Matrix &a, const Vector3 &v) {
-    // FIXME: implemenmt this
-    return Matrix(1);
-}
-
 Matrix CreateIdentityMatrix(size_t size) {
     Matrix out(size);
-    for (int i = 0; i < size; ++i) {
+    for (size_t i = 0; i < size; ++i) {
         out.set(i, i, 1);
     }
     return out;
