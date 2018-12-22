@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "Color.h"
+#include "../src/Color.h"
 
 namespace {
     TEST(Color, Add) {

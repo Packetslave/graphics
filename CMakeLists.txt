@@ -23,7 +23,7 @@ add_subdirectory(abseil-cpp)
 
 # -------- viewer
 
-add_executable(viewer viewer.cpp)
+add_executable(viewer src/viewer.cpp)
 add_subdirectory(efsw)
 set(STATIC_LIB ON)
 set(BOOST_ROOT "/Users/blanders/.brew")
@@ -35,52 +35,67 @@ target_link_libraries(viewer ${OpenCV_LIBS} efsw ${Boost_LIBRARIES})
 
 # Timer library and test
 
-add_library(timer SHARED Timer.h)
+add_library(timer SHARED src/Timer.h)
 set_target_properties(timer PROPERTIES LINKER_LANGUAGE CXX)
 
-add_executable(timer_unittest Timer_unittest.cpp)
-target_link_libraries(timer_unittest timer)
-target_link_libraries(timer_unittest gtest gtest_main)
+add_library(timer_unittest SHARED tests/Timer_unittest.cpp)
+target_link_libraries(timer_unittest gtest timer)
+
+add_executable(timer_unittest_main tests/Timer_unittest.cpp)
+target_link_libraries(timer_unittest_main gtest_main)
 
 # Tuple
 
-add_library(tuple SHARED Tuple.h)
+add_library(tuple SHARED src/Tuple.h)
 set_target_properties(tuple PROPERTIES LINKER_LANGUAGE CXX)
 
 # Vector3 and test
 
-add_library(vector3 SHARED Vector3.h)
+add_library(vector3 SHARED src/Vector3.h)
 set_target_properties(vector3 PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(vector3 tuple)
 
-add_executable(vector3_unittest Vector3_unittest.cpp)
-target_link_libraries(vector3_unittest vector3)
-target_link_libraries(vector3_unittest gtest gtest_main)
+add_library(vector3_unittest SHARED tests/Vector3_unittest.cpp)
+target_link_libraries(vector3_unittest gtest vector3)
+
+add_executable(vector3_unittest_main tests/Vector3_unittest.cpp)
+target_link_libraries(vector3_unittest_main gtest_main)
 
 # Color and test
 
-add_library(color SHARED Color.h)
+add_library(color SHARED src/Color.h)
 set_target_properties(color PROPERTIES LINKER_LANGUAGE CXX)
 
-add_executable(color_unittest Color_unittest.cpp)
-target_link_libraries(color_unittest color)
-target_link_libraries(color_unittest gtest gtest_main)
+add_library(color_unittest SHARED tests/Color_unittest.cpp)
+target_link_libraries(color_unittest gtest color)
+
+add_library(color_unittest_main tests/Color_unittest.cpp)
+target_link_libraries(color_unittest_main gtest_main)
 
 # Canvas and test
 
-add_library(canvas SHARED Canvas.h)
+add_library(canvas SHARED src/Canvas.h)
 set_target_properties(canvas PROPERTIES LINKER_LANGUAGE CXX)
 
-add_executable(canvas_unittest Canvas_unittest.cpp)
-target_link_libraries(canvas_unittest canvas absl::base absl::str_format)
-target_link_libraries(canvas_unittest gtest gtest_main)
+add_library(canvas_unittest SHARED tests/Canvas_unittest.cpp)
+target_link_libraries(canvas_unittest gtest canvas absl::base absl::str_format)
+
+add_executable(canvas_unittest_main tests/Canvas_unittest.cpp)
+target_link_libraries(canvas_unittest_main gtest_main)
 
 # Matrix and test
 
-add_library(matrix SHARED Matrix.h)
+add_library(matrix SHARED src/Matrix.h)
 set_target_properties(matrix PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(matrix vector3)
 
-add_executable(matrix_unittest Matrix_unittest.cpp Matrix.h)
-target_link_libraries(matrix_unittest matrix absl::base absl::str_format)
-target_link_libraries(matrix_unittest gtest gtest_main)
+add_library(matrix_unittest SHARED tests/Matrix_unittest.cpp src/Matrix.h)
+target_link_libraries(matrix_unittest gtest matrix absl::base absl::str_format)
+
+add_executable(matrix_unittest_main tests/Matrix_unittest.cpp src/Matrix.h)
+target_link_libraries(matrix_unittest_main gtest_main)
+
+# All tests
+
+add_executable(all_tests tests/all_tests.cpp)
+target_link_libraries(all_tests gtest canvas_unittest matrix_unittest color_unittest vector3_unittest timer_unittest)

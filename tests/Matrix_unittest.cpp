@@ -7,7 +7,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "Matrix.h"
+#include "../src/Matrix.h"
 
 namespace {
     TEST(Matrix, Create4x4) {

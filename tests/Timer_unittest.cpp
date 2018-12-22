@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "Timer.h"
+#include "../src/Timer.h"
 
 namespace {
     TEST(Timer, Smoke) {

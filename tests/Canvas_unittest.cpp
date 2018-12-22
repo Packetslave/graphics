@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "Canvas.h"
+#include "../src/Canvas.h"
 
 namespace {
     TEST(Canvas, SetGet) {

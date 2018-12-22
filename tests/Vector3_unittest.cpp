@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "Vector3.h"
+#include "../src/Vector3.h"
 
 namespace {
     TEST(Vector3, Add) {
