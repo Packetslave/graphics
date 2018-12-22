@@ -1,2 +1,3 @@
 # graphics
-Working through various computer graphics texts and tutorials
+Working through The Ray Tracer Challenge book, by Jamis Buck
+
