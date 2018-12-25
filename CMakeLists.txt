@@ -44,10 +44,16 @@ target_link_libraries(timer_unittest gtest timer)
 add_executable(timer_unittest_main tests/Timer_unittest.cpp)
 target_link_libraries(timer_unittest_main gtest_main)
 
-# Tuple
+# Tuple and test
 
 add_library(tuple SHARED src/Tuple.h)
 set_target_properties(tuple PROPERTIES LINKER_LANGUAGE CXX)
+
+add_library(tuple_unittest SHARED tests/Tuple_unittest.cpp)
+target_link_libraries(tuple_unittest gtest tuple)
+
+add_executable(tuple_unittest_main tests/Tuple_unittest.cpp)
+target_link_libraries(tuple_unittest_main gtest_main)
 
 # Vector3 and test
 
@@ -60,6 +66,17 @@ target_link_libraries(vector3_unittest gtest vector3)
 
 add_executable(vector3_unittest_main tests/Vector3_unittest.cpp)
 target_link_libraries(vector3_unittest_main gtest_main)
+
+# Point and test
+
+add_library(point SHARED src/Point.h)
+set_target_properties(point PROPERTIES LINKER_LANGUAGE CXX)
+
+add_library(point_unittest SHARED tests/Point_unittest.cpp)
+target_link_libraries(point_unittest gtest point vector3)
+
+add_executable(point_unittest_main tests/point_unittest.cpp)
+target_link_libraries(point_unittest_main vector3 gtest_main)
 
 # Color and test
 

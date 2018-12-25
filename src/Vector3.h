@@ -12,7 +12,7 @@ class Vector3 : public Tuple {
 public:
     Vector3() = default;
 
-    Vector3(float x, float y, float z) : Tuple(x, y, z) {}
+    Vector3(float x, float y, float z) : Tuple(x, y, z, 0.0) {}
 
     inline float magnitude() {
         return sqrt(x() * x() + y() * y() + z() * z());
