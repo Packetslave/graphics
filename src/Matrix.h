@@ -150,7 +150,7 @@ inline Matrix operator*(const Matrix &a, const Matrix &b) {
 
     for (size_t row = 0; row < size; ++row) {
         for (size_t col = 0; col < size; ++col) {
-            float sum = 0;
+            float sum = 0.0;
             for (size_t i = 0; i < size; ++i) {
                 sum += (a.get(row, i) * b.get(i, col));
             }
@@ -158,6 +158,21 @@ inline Matrix operator*(const Matrix &a, const Matrix &b) {
         }
     }
     return out;
+}
+
+inline Tuple operator*(const Matrix &a, const Tuple &b) {
+    assert(a.size() == 4);  // FIXME: make this generic?
+
+    float out[4];
+    for (size_t i = 0; i < 4; ++i) {
+        out[i] = a.get(i, 0) * b.x() + a.get(i, 1) * b.y() + a.get(i, 2) * b.z() + a.get(i, 3) * b.w();
+    }
+    return {
+            out[0],
+            out[1],
+            out[2],
+            out[3]
+    };
 }
 
 Matrix CreateIdentityMatrix(size_t size) {

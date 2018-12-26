@@ -106,6 +106,18 @@ namespace {
         ASSERT_EQ(d, c);
     }
 
+    TEST(Matrix, MultipleByTuple) {
+        Matrix a({
+                         {1, 2, 3, 4},
+                         {2, 4, 4, 2},
+                         {8, 6, 4, 1},
+                         {0, 0, 0, 1},
+                 });
+        Tuple b(1, 2, 3, 1);
+        Tuple c = a * b;
+        ASSERT_EQ(Tuple(18, 24, 33, 1), c);
+    }
+
     TEST(Matrix, CreateIdentity) {
         Matrix a({
                          {1, 0, 0, 0},
