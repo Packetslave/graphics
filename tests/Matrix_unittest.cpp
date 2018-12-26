@@ -7,6 +7,7 @@
 //
 
 #include "gtest/gtest.h"
+#include "../src/Point.h"
 #include "../src/Matrix.h"
 
 namespace {
@@ -353,4 +354,106 @@ namespace {
         Matrix d = c * b.inverse();
         ASSERT_TRUE(matrix_is_near(d, a, 0.00001));
     }
+}
+
+// ---------------- Matrix Transforms ----------------
+
+TEST(Transform, MultiplyTransformByPoint) {
+    Matrix a = CreateTransform(5, -3, 2);
+    Point b(-3, 4, 5);
+    Point c = a * b;
+    ASSERT_EQ(Point(2, 1, 7), c);
+}
+
+TEST(Transform, MultiplyTransformInverseByPoint) {
+    Matrix a = CreateTransform(5, -3, 2);
+    Matrix a2 = a.inverse();
+    Point b(-3, 4, 5);
+    Point c = a2 * b;
+    ASSERT_EQ(Point(-8, 7, 3), c);
+}
+
+TEST(Transform, MultiplyTransformByVector) {
+    Matrix a = CreateTransform(5, -3, 2);
+    Vector3 b(-3, 4, 5);
+    Vector3 c = a * b;
+    ASSERT_EQ(b, c);
+}
+
+TEST(Transform, ScalePoint) {
+    Matrix a = CreateScaling(2, 3, 4);
+    Point b(-4, 6, 8);
+    Point c = a * b;
+    ASSERT_EQ(Point(-8, 18, 32), c);
+}
+
+TEST(Transform, ScaleVector) {
+    Matrix a = CreateScaling(2, 3, 4);
+    Vector3 b(-4, 6, 8);
+    Vector3 c = a * b;
+    ASSERT_EQ(Vector3(-8, 18, 32), c);
+}
+
+TEST(Transform, MultiplyByScalingInverse) {
+    Matrix a = CreateScaling(2, 3, 4);
+    Matrix b = a.inverse();
+    Vector3 c(-4, 6, 8);
+    Vector3 d = b * c;
+    ASSERT_EQ(Vector3(-2, 2, 2), d);
+}
+
+TEST(Transform, Reflection) {
+    Matrix a = CreateScaling(-1, 1, 1);
+    Point b(2, 3, 4);
+    Point c = a * b;
+    ASSERT_EQ(Point(-2, 3, 4), c);
+}
+
+
+TEST(Transform, RotateX) {
+
+}
+
+TEST(Transform, RotateXInverse) {
+
+}
+
+TEST(Transform, RotateY) {
+
+}
+
+TEST(Transform, RotateZ) {
+
+}
+
+TEST(Transform, ShearXY) {
+
+}
+
+TEST(Transform, ShearXZ) {
+
+}
+
+TEST(Transform, ShearYX) {
+
+}
+
+TEST(Transform, ShearYZ) {
+
+}
+
+TEST(Transform, ShearZX) {
+
+}
+
+TEST(Transform, ShearZY) {
+
+}
+
+TEST(Transform, Chained) {
+
+}
+
+TEST(Transform, Chained2) {
+
 }

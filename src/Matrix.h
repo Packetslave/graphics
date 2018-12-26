@@ -175,11 +175,93 @@ inline Tuple operator*(const Matrix &a, const Tuple &b) {
     };
 }
 
+inline Vector3 operator*(const Matrix &a, const Vector3 &b) {
+    assert(a.size() == 4);  // FIXME: make this generic?
+
+    float out[4];
+    for (size_t i = 0; i < 4; ++i) {
+        out[i] = a.get(i, 0) * b.x() + a.get(i, 1) * b.y() + a.get(i, 2) * b.z() + a.get(i, 3) * b.w();
+    }
+    return {
+            out[0],
+            out[1],
+            out[2],
+    };
+}
+
+inline Point operator*(const Matrix &a, const Point &b) {
+    assert(a.size() == 4);  // FIXME: make this generic?
+
+    float out[4];
+    for (size_t i = 0; i < 4; ++i) {
+        out[i] = a.get(i, 0) * b.x() + a.get(i, 1) * b.y() + a.get(i, 2) * b.z() + a.get(i, 3) * b.w();
+    }
+    return {
+            out[0],
+            out[1],
+            out[2],
+    };
+}
+
 Matrix CreateIdentityMatrix(size_t size) {
     Matrix out(size);
     for (size_t i = 0; i < size; ++i) {
         out.set(i, i, 1);
     }
+    return out;
+}
+
+Matrix CreateTransform(const float x, const float y, const float z) {
+    Matrix out = CreateIdentityMatrix(4);
+    out.set(0, 3, x);
+    out.set(1, 3, y);
+    out.set(2, 3, z);
+    return out;
+}
+
+Matrix CreateScaling(const float x, const float y, const float z) {
+    Matrix out = CreateIdentityMatrix(4);
+    out.set(0, 0, x);
+    out.set(1, 1, y);
+    out.set(2, 2, z);
+    return out;
+}
+
+Matrix CreateRotationX(const float radians) {
+    Matrix out = CreateIdentityMatrix(4);
+    out.set(1, 1, cos(radians));
+    out.set(1, 2, -sin(radians));
+    out.set(2, 1, sin(radians));
+    out.set(2, 2, cos(radians));
+    return out;
+}
+
+Matrix CreateRotationY(const float radians) {
+    Matrix out = CreateIdentityMatrix(4);
+    out.set(0, 0, cos(radians));
+    out.set(0, 2, sin(radians));
+    out.set(2, 0, -sin(radians));
+    out.set(2, 2, cos(radians));
+    return out;
+}
+
+Matrix CreateRotationZ(const float radians) {
+    Matrix out = CreateIdentityMatrix(4);
+    out.set(0, 0, cos(radians));
+    out.set(0, 1, -sin(radians));
+    out.set(1, 0, sin(radians));
+    out.set(1, 1, cos(radians));
+    return out;
+}
+
+Matrix CreateShearing(const float xy, const float xz, const float yx, const float yz, const float zx, const float zy) {
+    Matrix out = CreateIdentityMatrix(4);
+    out.set(0, 1, xy);
+    out.set(0, 2, xz);
+    out.set(1, 0, yx);
+    out.set(1, 2, yz);
+    out.set(2, 0, zx);
+    out.set(2, 1, zy);
     return out;
 }
 
