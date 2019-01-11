@@ -11,6 +11,8 @@
 class Point : public Tuple {
 public:
     Point() = default;
+
+    explicit Point(const Tuple &t) : Point(t.x(), t.y(), t.z()) {}
     Point(float x, float y, float z) : Tuple(x, y, z, 1.0) {}
 };
 

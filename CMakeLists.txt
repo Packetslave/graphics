@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(graphics)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 
 # -------- Google Test
@@ -93,9 +93,10 @@ target_link_libraries(color_unittest_main gtest_main)
 
 add_library(canvas SHARED src/Canvas.h)
 set_target_properties(canvas PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(canvas absl::base absl::str_format)
 
 add_library(canvas_unittest SHARED tests/Canvas_unittest.cpp)
-target_link_libraries(canvas_unittest gtest canvas absl::base absl::str_format)
+target_link_libraries(canvas_unittest gtest canvas)
 
 add_executable(canvas_unittest_main tests/Canvas_unittest.cpp)
 target_link_libraries(canvas_unittest_main gtest_main)
@@ -111,6 +112,40 @@ target_link_libraries(matrix_unittest gtest matrix absl::base absl::str_format)
 
 add_executable(matrix_unittest_main tests/Matrix_unittest.cpp src/Matrix.h)
 target_link_libraries(matrix_unittest_main gtest_main)
+
+# Ray and test
+
+add_library(ray SHARED src/Ray.h)
+set_target_properties(ray PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(ray point vector3)
+
+add_library(ray_unittest SHARED tests/Ray_unittest.cpp src/Ray.h)
+target_link_libraries(ray_unittest gtest matrix absl::base absl::str_format)
+
+add_executable(ray_unittest_main tests/Ray_unittest.cpp src/Ray.h)
+target_link_libraries(ray_unittest_main gtest_main)
+
+# Intersection
+
+add_library(intersection SHARED src/Intersection.h)
+set_target_properties(intersection PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(intersection ray)
+
+# Sphere and test
+
+add_library(sphere SHARED src/Sphere.h)
+set_target_properties(sphere PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(sphere ray intersection)
+
+add_library(sphere_unittest SHARED tests/Sphere_unittest.cpp src/sphere.h)
+target_link_libraries(sphere_unittest gtest matrix absl::base absl::str_format)
+
+add_executable(sphere_unittest_main tests/Sphere_unittest.cpp src/sphere.h)
+target_link_libraries(sphere_unittest_main gtest_main)
+
+# Sphere rendering test #1
+add_executable(sphere_test1 src/Sphere_test1.cpp)
+target_link_libraries(sphere_test1 sphere canvas)
 
 # All tests
 
