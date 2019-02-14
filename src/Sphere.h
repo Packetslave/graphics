@@ -30,6 +30,10 @@ public:
         out.emplace_back(Intersection((-b + sqrt(d)) / (2 * a), this));
         return out;
     }
+
+  Vector3 normal_at(const Point &p) {
+    return (p - Point(0, 0, 0)).normalize();
+  }
 };
 
 std::optional<Intersection> Hit(const std::vector<Intersection> &v) {
