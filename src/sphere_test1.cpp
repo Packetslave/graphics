@@ -4,8 +4,11 @@
 
 #include "Canvas.h"
 #include "Sphere.h"
+#include "src/Timer.h"
 
 int main() {
+    Timer t("sphere_test1", Timer::MILLISECONDS);
+
     int canvas_pixels = 100;
     Canvas out(canvas_pixels, canvas_pixels);
     Color red(1, 0, 0);

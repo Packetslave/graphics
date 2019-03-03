@@ -13,6 +13,13 @@ cc_library(
 )
 
 cc_library(
+    name = "timer",
+    srcs = [
+        "Timer.h"
+    ]
+)
+
+cc_library(
   name = "tuple",
   srcs = [
     "Tuple.h",
@@ -78,6 +85,7 @@ cc_binary(
     ":canvas",
     ":color",
     ":sphere",
+    ":timer",
     "@com_google_absl//absl/strings:str_format",
   ]
 )
