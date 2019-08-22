@@ -21,6 +21,11 @@ find_package(OpenCV REQUIRED)
 
 add_subdirectory(abseil-cpp)
 
+# -------- Eigen
+
+set(Eigen3_DIR /Users/blanders/src/external/eigen/build/)
+find_package (Eigen3 3.3 REQUIRED NO_MODULE)
+
 # -------- viewer
 
 add_executable(viewer src/viewer.cpp)
@@ -59,7 +64,7 @@ target_link_libraries(tuple_unittest_main gtest_main)
 
 add_library(vector3 SHARED src/Vector3.h)
 set_target_properties(vector3 PROPERTIES LINKER_LANGUAGE CXX)
-target_link_libraries(vector3 tuple)
+target_link_libraries(vector3 tuple Eigen3::Eigen)
 
 add_library(vector3_unittest SHARED tests/Vector3_unittest.cpp)
 target_link_libraries(vector3_unittest gtest vector3)

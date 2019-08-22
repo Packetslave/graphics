@@ -22,10 +22,12 @@
   <component name="ChangeListManager">
     <list default="true" id="a542013e-d496-4de7-a477-3089986b93a4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/BUILD" beforeDir="false" afterPath="$PROJECT_DIR$/../src/BUILD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/Timer.h" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Timer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/sphere_test1.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sphere_test1.cpp" afterDir="false" />
     </list>
+    <ignored path="../bazel-bin/" />
+    <ignored path="../bazel-genfiles/" />
+    <ignored path="../bazel-graphics/" />
+    <ignored path="../bazel-out/" />
+    <ignored path="../bazel-testlogs/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,11 +35,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/BUILD">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="545">
+            <state relative-caret-position="1305">
               <caret line="87" column="13" selection-start-line="87" selection-start-column="13" selection-end-line="87" selection-end-column="13" />
             </state>
           </provider>
@@ -46,8 +48,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/Timer.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="23" column="35" lean-forward="true" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+            <state relative-caret-position="435">
+              <caret line="32" column="41" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
               <folding>
                 <element signature="e#101#118#0" expanded="true" />
               </folding>
@@ -58,7 +60,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/sphere_test1.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
+            <state relative-caret-position="135">
               <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
               <folding>
                 <element signature="e#50#69#0" expanded="true" />
@@ -83,7 +85,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="943" />
-    <option name="y" value="260" />
+    <option name="y" value="440" />
     <option name="width" value="1400" />
     <option name="height" value="1171" />
   </component>
@@ -93,6 +95,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -113,7 +116,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -230,7 +232,9 @@
       <option name="presentableId" value="Default" />
       <updated>1547200417944</updated>
       <workItem from="1547200419844" duration="1783000" />
-      <workItem from="1551649523080" duration="1198000" />
+      <workItem from="1551649523080" duration="1538000" />
+      <workItem from="1553116416607" duration="9000" />
+      <workItem from="1562989901195" duration="21000" />
     </task>
     <task id="LOCAL-00001" summary="Adding bazel configs (partial)">
       <created>1547200850971</created>
@@ -239,29 +243,36 @@
       <option name="project" value="LOCAL" />
       <updated>1547200850972</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Improve timer class and add to sphere_test1">
+      <created>1551652499349</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1551652499349</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2981000" />
+    <option name="totallyTimeSpent" value="3351000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="943" y="260" width="1400" height="1171" extended-state="0" />
+    <frame x="943" y="440" width="1400" height="1171" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2533137" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26067746" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49779087" visible="true" weight="0.32993513" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49779087" weight="0.32993513" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49852726" weight="0.32993513" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.4963181" visible="true" weight="0.32993513" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info active="true" anchor="bottom" id="Blaze Console" order="9" sideWeight="0.5022091" side_tool="true" visible="true" weight="0.32993513" />
+      <window_info active="true" anchor="bottom" id="Blaze Console" order="9" sideWeight="0.5036819" side_tool="true" visible="true" weight="0.32993513" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4992636" weight="0.32993513" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Blaze Problems" order="12" sideWeight="0.49852726" weight="0.32993513" />
@@ -275,21 +286,25 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Adding bazel configs (partial)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding bazel configs (partial)" />
+    <MESSAGE value="Improve timer class and add to sphere_test1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improve timer class and add to sphere_test1" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../src/BUILD">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
+        <state relative-caret-position="1305">
           <caret line="87" column="13" selection-start-line="87" selection-start-column="13" selection-end-line="87" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/sphere_test1.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
+        <state relative-caret-position="135">
           <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
           <folding>
             <element signature="e#50#69#0" expanded="true" />
@@ -299,8 +314,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/Timer.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="23" column="35" lean-forward="true" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+        <state relative-caret-position="435">
+          <caret line="32" column="41" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
           <folding>
             <element signature="e#101#118#0" expanded="true" />
           </folding>
